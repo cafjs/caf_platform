@@ -1,0 +1,52 @@
+{
+    "name": "top",
+    "module" : "./platform_main",
+    "description" : "Platform supervisor",
+    "env" : {
+        "maxRetries" : "process.env.maxRetries||10",
+        "retryDelay" : "process.env.retryDelay||1000",
+        "leaseTimeout": "process.env.leaseTimeout||60",
+        "interval": "process.env.interval||2000",
+        "dieDelay": "process.env.dieDelay||-1",
+        "maxHangRetries":  "process.env.maxHangRetries||10"
+    },
+    "components": [
+        {
+            "module": "caf_components#plug_log",
+            "name": "log",
+            "description": "Logger service",
+            "env" : {
+                "logLevel" : "TRACE"
+            }
+        },
+        {
+            "name": "cp",
+            "module" : "caf_redis#plug",
+            "description" : "redisPlug",
+            "env" : {
+               "nodeId": "ssdsdasdsd_1",
+               "redis" : {
+                   "password" : null,
+                   "host" : "localhost",
+                   "port" : 6379
+                },
+                "coalescing" : {
+                    "interval" : 10,
+                    "maxPendingUpdates" : 10
+                }
+            }
+        },
+        {
+            "module": "./plug_registry",
+            "name": "registry",
+            "description": "CA registry service",
+            "env" : {
+                "__ca_json__" : "ca.json",
+                "maxRetries" :"$._.env.maxRetries",
+                "retryDelay" : "$._.env.retryDelay"
+            },
+            "components" : [
+            ]
+        }
+    ]
+}
