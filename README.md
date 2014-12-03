@@ -4,7 +4,10 @@ Co-design permanent, active, stateful, reliable cloud proxies with your web app.
 
 See http://www.cafjs.com 
 
-## CAF Core
+## CAF Platform
+
+[![Build Status](http://ci.cafjs.com/github.com/cafjs/caf_platform/status.svg?branch=master)](http://ci.cafjs.com/github.com/cafjs/caf_platform)
+
 
 This repository contains CAF platform components. 
 

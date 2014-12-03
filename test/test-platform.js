@@ -48,7 +48,9 @@ module.exports = {
                              test.equals(self.$._.$.registry.$.ca1
                                          .__ca_getName__(),
                                          'ca1');
-                             cb(null);
+                             setTimeout(function() {
+                                            cb(null);
+                                        }, 2000);
                          }
                      ], function(err, res) {
                          test.ifError(err);

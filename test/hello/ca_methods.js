@@ -16,6 +16,22 @@ limitations under the License.
 "use strict";
 
 exports.methods = {
+    "__ca_init__" : function(cb) {
+        this.$.log.debug("++++++++++++++++Calling init");
+        this.state.pulses = 0;
+        cb(null);
+    },
+    "__ca_resume__" : function(cp, cb) {
+        this.$.log.debug("++++++++++++++++Calling resume: pulses=" +
+                         this.state.pulses);
+
+        cb(null);
+    },
+    "__ca_pulse__" : function(cb) {
+        this.state.pulses = this.state.pulses + 1;
+        this.$.log.debug('<<< Calling Pulse>>>' + this.state.pulses);
+        cb(null);
+    },
     hello: function(msg, cb) {
         this.state.lastMsg = msg;
         cb(null, 'Bye:' + msg);
