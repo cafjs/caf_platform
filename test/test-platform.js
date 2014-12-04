@@ -56,5 +56,40 @@ module.exports = {
                          test.ifError(err);
                          test.done();
                      });
+    },
+    many: function(test) {
+
+        var self = this;
+        var all = [];
+        for (var i =0; i<50; i++) {
+            all.push('ca'+i);
+        }
+        test.expect(3);
+        async.series([
+                         function(cb) {
+                             async
+                                 .each(all,
+                                          function(x, cb1) {
+                                              self.$._.$.registry
+                                                  .__ca_instanceChild__(null,
+                                                                        { name :
+                                                                          x},
+                                                                        cb1);
+                                          }, cb);
+                         },
+                         function(cb) {
+                             test.equals(typeof self.$._.$.registry.$.ca7,
+                                         'object');
+                             test.equals(self.$._.$.registry.$.ca7
+                                         .__ca_getName__(),
+                                         'ca7');
+                             setTimeout(function() {
+                                            cb(null);
+                                        }, 5000);
+                         }
+                     ], function(err, res) {
+                         test.ifError(err);
+                         test.done();
+                     });
     }
 };
