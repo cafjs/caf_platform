@@ -61,7 +61,7 @@ module.exports = {
 
         var self = this;
         var all = [];
-        for (var i =0; i<1000; i++) {
+        for (var i =0; i<300; i++) {
             all.push('ca'+i);
         }
         test.expect(3);

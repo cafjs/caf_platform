@@ -4,9 +4,10 @@
     "description" : "Platform supervisor",
     "env" : {
         "maxRetries" : "process.env.maxRetries||10",
-        "retryDelay" : "process.env.retryDelay||1000",
+        "retryDelay" : "process.env.retryDelay||10000",
         "leaseTimeout": "process.env.leaseTimeout||60",
         "interval": "process.env.interval||1000",
+        "shortInterval": "process.env.shortInterval||1000",
         "longInterval": "process.env.longInterval||30000",
         "dieDelay": "process.env.dieDelay||-1",
         "maxHangRetries":  "process.env.maxHangRetries||10"
@@ -62,7 +63,7 @@
             "name": "cron_lease",
             "description": "Lease service cron",
             "env" : {
-                "interval":"$._.env.interval"
+                "interval":"$._.env.shortInterval"
             }
         },
         {
@@ -70,7 +71,7 @@
             "name": "cron_pulser",
             "description": "Pulser service cron",
             "env" : {
-                "interval":"$._.env.interval"
+                "interval":"$._.env.shortInterval"
             }
         },
         {
@@ -86,7 +87,7 @@
             "name": "cron_security",
             "description": "Security service cron",
             "env" : {
-                "interval":"$._.env.interval"
+                "interval":"$._.env.shortInterval"
             }
         }
     ]
