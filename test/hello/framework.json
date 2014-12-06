@@ -7,6 +7,7 @@
         "retryDelay" : "process.env.retryDelay||1000",
         "leaseTimeout": "process.env.leaseTimeout||60",
         "interval": "process.env.interval||1000",
+        "longInterval": "process.env.longInterval||10000",
         "dieDelay": "process.env.dieDelay||-1",
         "maxHangRetries":  "process.env.maxHangRetries||10"
     },
@@ -77,7 +78,7 @@
             "name": "cron_ripper",
             "description": "Ripper service cron",
             "env" : {
-                "interval":"$._.env.interval"
+                "interval":"$._.env.longInterval"
             }
         },
         {
