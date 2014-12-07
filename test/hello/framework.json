@@ -63,7 +63,7 @@
             "name": "cron_lease",
             "description": "Lease service cron",
             "env" : {
-                "interval":"$._.env.shortInterval"
+                "interval":"$._.env.longInterval"
             }
         },
         {
@@ -79,7 +79,7 @@
             "name": "cron_ripper",
             "description": "Ripper service cron",
             "env" : {
-                "interval":"$._.env.longInterval"
+                "interval":20000
             }
         },
         {
