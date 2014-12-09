@@ -87,7 +87,22 @@ module.exports = {
         for (var i =0; i<NCAs; i++) {
             all.push('ca'+i);
         }
-        test.expect(6);
+
+        var testCAs = function() {
+            var allOK = true;
+            all.forEach(function(x) {
+                            var isObj =
+                                (typeof self.$._.$.registry.$[x] === 'object');
+                            if (!isObj) {
+                                console.log(x + ' not an object');
+                            }
+                            allOK = allOK && isObj;
+                        });
+            console.log('isOK:' +allOK);
+            return allOK;
+        };
+
+        test.expect(8);
         var t1, t2, t3, t4, t5, t6;
         async.series([
                          function(cb) {
@@ -111,9 +126,11 @@ module.exports = {
                              test.equals(self.$._.$.registry.$.ca7
                                          .__ca_getName__(),
                                          'ca7');
+                             test.ok(testCAs());
                              setTimeout(function() {
+                                            test.ok(testCAs());
                                             cb(null);
-                                        }, 5000);
+                                        }, 10000);
                          },
                          function(cb) {
                              t3 = (new Date()).getTime();
