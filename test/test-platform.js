@@ -1,9 +1,18 @@
 var async = require('async');
+var caf_comp = require('caf_components');
+var myUtils = caf_comp.myUtils;
 var json_rpc = require('caf_transport');
 
 var hello = require('./hello/main.js');
 
 var app = hello;
+
+process.on('uncaughtException', function (err) {
+               console.log("Uncaught Exception: " + err);
+               console.log(myUtils.errToPrettyStr(err));
+               process.exit(1);
+
+});
 
 var newMsg = function(ca, sessionId, methodName, arg1) {
     var msg = json_rpc.systemRequest(ca, methodName);

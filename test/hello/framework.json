@@ -11,7 +11,7 @@
         "shortInterval": "process.env.shortInterval||1000",
         "longInterval": "process.env.longInterval||10000",
         "dieDelay": "process.env.dieDelay||-1",
-        "maxHangRetries":  "process.env.maxHangRetries||20"
+        "maxHangRetries":  "process.env.maxHangRetries||200"
     },
     "components": [
         {
@@ -72,7 +72,7 @@
             "name": "cron_pulser",
             "description": "Pulser service cron",
             "env" : {
-                "interval":"$._.env.shortInterval"
+                "interval":"$._.env.longInterval"
             }
         },
         {
