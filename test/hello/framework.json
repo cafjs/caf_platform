@@ -15,12 +15,29 @@
     },
     "components": [
         {
-            "module": "caf_components#plug_log",
             "name": "log",
+            "module": "caf_components#plug_log",
             "description": "Logger service",
             "env" : {
-                "logLevel" : "WARN"
+                "logLevel" : "DEBUG"
             }
+        },
+        {
+            "name": "paas",
+            "module": "./plug_paas",
+            "description": "PaaS config service",
+             "env": {
+                 "paas" : "cloudfoundry",
+                 "port" : "process.env.VCAP_APP_PORT||3000",
+                 "host" : "process.env.VCAP_APP_HOST||localhost",
+                 "home": "process.env.HOME||/tmp",
+
+                 "redis" : {
+                     "port" : 6379,
+                     "hostname" : "localhost",
+                     "password" : null
+                 }
+             }
         },
         {
             "name": "cp",
@@ -40,16 +57,16 @@
             }
         },
         {
-            "module": "./plug_lease",
             "name": "lease",
+            "module": "./plug_lease",
             "description": "Lease service",
             "env" : {
                 "leaseTimeout": "$._.env.leaseTimeout"
             }
         },
         {
-            "module": "./plug_registry",
             "name": "registry",
+            "module": "./plug_registry",
             "description": "CA registry service",
             "env" : {
                 "__ca_json__" : "ca.json",
@@ -60,32 +77,32 @@
             ]
         },
         {
-            "module": "./cron_lease",
             "name": "cron_lease",
+            "module": "./cron_lease",
             "description": "Lease service cron",
             "env" : {
                 "interval":"$._.env.longInterval"
             }
         },
         {
-            "module": "./cron_pulser",
             "name": "cron_pulser",
+            "module": "./cron_pulser",
             "description": "Pulser service cron",
             "env" : {
                 "interval":"$._.env.longInterval"
             }
         },
         {
-            "module": "./cron_ripper",
             "name": "cron_ripper",
+            "module": "./cron_ripper",
             "description": "Ripper service cron",
             "env" : {
                 "interval":20000
             }
         },
         {
-            "module": "./cron_security",
             "name": "cron_security",
+            "module": "./cron_security",
             "description": "Security service cron",
             "env" : {
                 "interval":"$._.env.shortInterval"
