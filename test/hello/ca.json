@@ -6,7 +6,7 @@
         "maxRetries" : "process.env.maxRetries||10",
         "retryDelay" : "process.env.retryDelay||1000",
         "stateVersion": "process.env.stateVersion||0.1.0",
-        "leaseTimeout": "process.env.leaseTimeout||10"
+        "leaseTimeout": "process.env.leaseTimeout||20"
     },
     "components" : [
         {
