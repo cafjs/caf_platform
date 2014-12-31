@@ -1,0 +1,213 @@
+{
+    "name": "top",
+    "module" : "./platform_main",
+    "description" : "Platform supervisor",
+    "env" : {
+        "maxRetries" : "process.env.maxRetries||10",
+        "retryDelay" : "process.env.retryDelay||1000",
+        "leaseTimeout": "process.env.leaseTimeout||10",
+        "interval": "process.env.interval||5000",
+        "longInterval": "process.env.longInterval||10000",
+        "dieDelay": "process.env.dieDelay||-1",
+        "maxHangRetries":  "process.env.maxHangRetries||200",
+        "publicHostname" : "process.env.publicHostname||foo.vcap.me",
+        "publicPortStart" : "process.env.publicPortStart||4000",
+        "publicPortEnd" : "process.env.publicPortEnd||4010"
+    },
+    "components": [
+        {
+            "name": "log",
+            "module": "caf_components#plug_log",
+            "description": "Logger service",
+            "env" : {
+                "logLevel" : "DEBUG"
+            }
+        },
+        {
+            "name": "paas",
+            "module": "./plug_paas",
+            "description": "PaaS config service",
+             "env": {
+                 "paas" : "cloudfoundry",
+                 "port" : "process.env.VCAP_APP_PORT||3000",
+                 "host" : "process.env.VCAP_APP_HOST||localhost",
+                 "home": "process.env.HOME||/tmp",
+                 "redis" : {
+                     "port" : 6379,
+                     "hostname" : "localhost",
+                     "password" : null
+                 }
+             }
+        },
+        {
+            "name": "cp",
+            "module" : "caf_redis#plug",
+            "description" : "Checkpointing service",
+            "env" : {
+               "nodeId": "default",
+               "redis" : {
+                   "password" : null,
+                   "host" : "localhost",
+                   "port" : 6379
+                },
+                "coalescing" : {
+                    "interval" : 10,
+                    "maxPendingUpdates" : 20
+                }
+            }
+        },
+        {
+            "name": "lease",
+            "module": "./plug_lease",
+            "description": "Lease service",
+            "env" : {
+                "leaseTimeout": "$._.env.leaseTimeout"
+            }
+        },
+        {
+            "name": "nodes",
+            "module": "./plug_nodes",
+            "description": "Nodes management service",
+            "env" : {
+                "nodesService" : "cp",
+                "leaseTimeout": "$._.env.leaseTimeout",
+                "allPublicNodeIds" : [
+                    {
+                        "hostname" : "$._.env.publicHostname",
+                        "portRange" : ["$._.env.publicPortStart",
+                                       "$._.env.publicPortEnd"]
+                    }
+                ]
+            }
+        },
+        {
+            "name": "registry",
+            "module": "./plug_registry",
+            "description": "CA registry service",
+            "env" : {
+                "__ca_json__" : "ca.json",
+                "maxRetries" : 1,
+                "retryDelay" : "$._.env.retryDelay"
+            },
+            "components" : [
+            ]
+        },
+        {
+            "name": "cron_lease",
+            "module": "./cron_lease",
+            "description": "Lease service cron",
+            "env" : {
+                "interval":"$._.env.interval"
+            }
+        },
+        {
+            "name": "cron_pulser",
+            "module": "./cron_pulser",
+            "description": "Pulser service cron",
+            "env" : {
+                "interval":"$._.env.interval"
+            }
+        },
+        {
+            "name": "cron_ripper",
+            "module": "./cron_ripper",
+            "description": "Ripper service cron",
+            "env" : {
+                "interval":"$._.env.longInterval"
+            }
+        },
+        {
+            "name": "cron_security",
+            "module": "./cron_security",
+            "description": "Security service cron",
+            "env" : {
+                "interval":"$._.env.interval"
+            }
+        },
+        {
+            "name": "cron_nodes",
+            "module": "./cron_nodes",
+            "description": "Nodes service cron",
+            "env" : {
+                "interval":"$._.env.interval"
+            }
+        },
+        {
+            "name": "pipeline",
+            "module": "./pipeline_main",
+            "description": "Message processing pipeline",
+            "env" : {
+                "maxRetries" :"$._.env.maxRetries",
+                "retryDelay" : "$._.env.retryDelay",
+                "specialMethods" : [
+                    "ping",
+                    "foo"
+                ]
+            },
+            "components": [
+                {
+                    "name": "ping",
+                    "module": "./pipe_ping",
+                    "description": "Liveness check",
+                    "env" : {
+                        "webSocketPipe": true,
+                        "httpPipe" : true,
+                        "path": "/ping"
+                    }
+                },
+                {
+                    "name": "bodyParser",
+                    "module": "./pipe_bodyParser",
+                    "description": "JSON body parser for http request",
+                    "env" : {
+                        "webSocketPipe": false,
+                        "httpPipe" : true,
+                        "path": "/ca"
+                    }
+                },
+                {
+                    "name": "dispatcher",
+                    "module": "./pipe_dispatcher",
+                    "description": "CA request dispatcher",
+                    "env" : {
+                        "webSocketPipe": true,
+                        "httpPipe" : true,
+                        "path": "/ca"
+                    }
+                },
+                {
+                    "name": "redirect",
+                    "module": "./pipe_redirect",
+                    "description": "Redirect request to a different node",
+                    "env" : {
+                        "webSocketPipe": true,
+                        "httpPipe" : true,
+                        "path": "/ca"
+                    }
+                },
+                {
+                    "name": "static1",
+                    "module": "./pipe_static",
+                    "description": "Web server for app static resources",
+                    "env" : {
+                        "webSocketPipe": false,
+                        "httpPipe" : true,
+                        "path": "/",
+                        "publicRelativePath" : "../../../public"
+                    }
+                },
+                {
+                    "name": "static2",
+                    "module": "./pipe_static",
+                    "description": "Web server for default static resources",
+                    "env" : {
+                        "webSocketPipe": false,
+                        "httpPipe" : true,
+                        "path": "/",
+                        "publicRelativePath" : "../public"
+                    }
+                }
+            ]
+        }
+    ]
+}
