@@ -60,10 +60,9 @@ module.exports = {
         } else {
             this.ws.close();
             this.ws.removeAllListeners();
-            this.$.top.__ca_shutdown__(null, cb);
+            this.$.top.__ca_graceful_shutdown__(null, cb);
         }
     },
-
     helloworld: function (test) {
         var self = this;
 
@@ -93,10 +92,9 @@ module.exports = {
                      });
     },
     many: function(test) {
-
         var self = this;
         var all = [];
-        var NCAs = 1000;
+        var NCAs = 1500;
         for (var i =0; i<NCAs; i++) {
             all.push('ca'+i);
         }
@@ -337,6 +335,7 @@ module.exports = {
                          test.done();
                      });
     },
+
     nodes: function(test) {
         var self = this;
         test.expect(6);
@@ -436,7 +435,7 @@ module.exports = {
                                                 cb(err, data);
                                             }, 20000);
                              };
-                             self.$2.top.__ca_shutdown__(null, cb1);
+                             self.$2.top.__ca_graceful_shutdown__(null, cb1);
                          },
                          function(cb) {
                              // now succeeds due to ws2 shutdown
@@ -457,4 +456,5 @@ module.exports = {
                          test.done();
                      });
     }
+
 };
