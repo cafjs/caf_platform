@@ -69,6 +69,7 @@
             "module": "./plug_nodes",
             "description": "Nodes management service",
             "env" : {
+                "stealthNode" : false,
                 "nodesService" : "cp",
                 "leaseTimeout": "$._.env.leaseTimeout",
                 "allPublicNodeIds" : [
