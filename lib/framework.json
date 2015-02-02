@@ -181,6 +181,7 @@
                     "module": "./pipe_redirect",
                     "description": "Redirect request to a different node",
                     "env" : {
+                        "usePortRedirection" : false,
                         "webSocketPipe": true,
                         "httpPipe" : true,
                         "path": "/ca"
