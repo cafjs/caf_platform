@@ -12,7 +12,9 @@
         "maxHangRetries":  "process.env.maxHangRetries||200",
         "publicHostname" : "process.env.publicHostname||foo.vcap.me",
         "publicPortStart" : "process.env.publicPortStart||4000",
-        "publicPortEnd" : "process.env.publicPortEnd||4010"
+        "publicPortEnd" : "process.env.publicPortEnd||4010",
+        "publicPath" : "process.env.publicPath||../../../../../public",
+        "publicSharedPath" : "process.env.publicSharedPath||../../../public"
     },
     "components": [
         {
@@ -195,7 +197,7 @@
                         "webSocketPipe": false,
                         "httpPipe" : true,
                         "path": "/",
-                        "publicRelativePath" : "../../../public"
+                        "publicPath" : "$._.env.publicPath"
                     }
                 },
                 {
@@ -206,7 +208,7 @@
                         "webSocketPipe": false,
                         "httpPipe" : true,
                         "path": "/",
-                        "publicRelativePath" : "../public"
+                        "publicPath" : "$._.env.publicSharedPath"
                     }
                 }
             ]
