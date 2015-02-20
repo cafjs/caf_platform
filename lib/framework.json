@@ -169,6 +169,16 @@
                     }
                 },
                 {
+                    "name": "security",
+                    "module": "./pipe_security",
+                    "description": "Authentication checks, add caf_security/plug_security to enable them.",
+                    "env" : {
+                        "webSocketPipe": true,
+                        "httpPipe" : true,
+                        "path": "/ca"
+                    }
+                },
+                {
                     "name": "dispatcher",
                     "module": "./pipe_dispatcher",
                     "description": "CA request dispatcher",

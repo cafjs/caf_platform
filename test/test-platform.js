@@ -20,8 +20,13 @@ process.on('uncaughtException', function (err) {
 
 });
 
+var newRequest = function(ca, methodName) {
+    return json_rpc.request(json_rpc.DUMMY_TOKEN, ca, json_rpc.DEFAULT_FROM,
+                            json_rpc.DEFAULT_SESSION, methodName);
+};
+
 var newMsg = function(ca, sessionId, methodName, arg1) {
-    var msg = json_rpc.systemRequest(ca, methodName);
+    var msg = newRequest(ca, methodName);
     if (arg1 === undefined) {
         return json_rpc.request(json_rpc.getToken(msg), json_rpc.getTo(msg),
                                 json_rpc.getFrom(msg), sessionId,
