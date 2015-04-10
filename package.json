@@ -1,7 +1,7 @@
 {
     "name": "caf_platform",
     "description": "Cloud Assistant Framework Platform",
-    "version": "0.2.18",
+    "version": "0.2.19",
     "author": "Antonio Lain <antlai@cafjs.com>",
     "dependencies": {
         "caf_components": "^0.2.0",
@@ -9,6 +9,7 @@
         "connect" : "^3.3.0",
         "serve-static" : "^1.7.0",
         "body-parser": "^1.10.0",
+        "compression" : "^1.4.3",
         "ws" : "^0.6.0",
         "async" : ">=0.1.9"
     },

@@ -14,7 +14,7 @@
         "publicPortStart" : "process.env.publicPortStart||4000",
         "publicPortEnd" : "process.env.publicPortEnd||4010",
         "publicPath" : "process.env.publicPath||../../../../../public",
-        "publicSharedPath" : "process.env.publicSharedPath||../../../public"
+        "publicSharedPath" : "process.env.publicSharedPath||../public"
     },
     "components": [
         {
@@ -148,6 +148,16 @@
                 ]
             },
             "components": [
+                {
+                    "name": "compress",
+                    "module": "./pipe_compress",
+                    "description": "Compression of responses.",
+                    "env" : {
+                        "webSocketPipe": false,
+                        "httpPipe" : true,
+                        "path": "/"
+                    }
+                },
                 {
                     "name": "ping",
                     "module": "./pipe_ping",
