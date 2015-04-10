@@ -159,6 +159,18 @@
                     }
                 },
                 {
+                    "name": "cache",
+                    "module": "./pipe_cache",
+                    "description": "Cache of responses.",
+                    "env" : {
+                        "webSocketPipe": false,
+                        "httpPipe" : true,
+                        "path": "/",
+                        "cacheService" : "cp"
+                    }
+                },
+
+                {
                     "name": "ping",
                     "module": "./pipe_ping",
                     "description": "Liveness check",
