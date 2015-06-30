@@ -32,11 +32,12 @@
              "env": {
                  "paas" : "cloudfoundry",
                  "port" : "process.env.VCAP_APP_PORT||3000",
+                 "internalPort" : "process.env.DOCKER_APP_INTERNAL_PORT||-1",
                  "host" : "process.env.VCAP_APP_HOST||localhost",
                  "home": "process.env.HOME||/tmp",
                  "redis" : {
-                     "port" : 6379,
-                     "hostname" : "localhost",
+                     "port" : "process.env.REDIS_PORT_6379_TCP_PORT||6379",
+                     "hostname" : "process.env.REDIS_PORT_6379_TCP_ADDR||localhost",
                      "password" : null
                  }
              }
@@ -49,8 +50,8 @@
                "nodeId": "default",
                "redis" : {
                    "password" : null,
-                   "host" : "localhost",
-                   "port" : 6379
+                   "port" : "process.env.REDIS_PORT_6379_TCP_PORT||6379",
+                   "host" : "process.env.REDIS_PORT_6379_TCP_ADDR||localhost"
                 },
                 "coalescing" : {
                     "interval" : 10,
