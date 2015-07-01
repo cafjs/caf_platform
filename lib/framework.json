@@ -51,7 +51,7 @@
                "redis" : {
                    "password" : null,
                    "port" : "process.env.REDIS_PORT_6379_TCP_PORT||6379",
-                   "host" : "process.env.REDIS_PORT_6379_TCP_ADDR||localhost"
+                   "hostname" : "process.env.REDIS_PORT_6379_TCP_ADDR||localhost"
                 },
                 "coalescing" : {
                     "interval" : 10,
