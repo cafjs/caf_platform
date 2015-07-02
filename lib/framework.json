@@ -30,14 +30,14 @@
             "module": "./plug_paas",
             "description": "PaaS config service",
              "env": {
-                 "paas" : "cloudfoundry",
-                 "port" : "process.env.VCAP_APP_PORT||3000",
+                 "paas" : "marathon",
+                 "port" : "process.env.PORT0||3000",
                  "internalPort" : "process.env.DOCKER_APP_INTERNAL_PORT||-1",
-                 "host" : "process.env.VCAP_APP_HOST||localhost",
+                 "host" : "process.env.HOST||localhost",
                  "home": "process.env.HOME||/tmp",
                  "redis" : {
-                     "port" : "process.env.REDIS_PORT_6379_TCP_PORT||6379",
-                     "hostname" : "process.env.REDIS_PORT_6379_TCP_ADDR||localhost",
+                     "port" : "process.env.REDIS_PORT_6379_TCP_PORT||-1",
+                     "hostname" : "process.env.HOST||default",
                      "password" : null
                  }
              }
@@ -47,11 +47,12 @@
             "module" : "caf_redis#plug",
             "description" : "Checkpointing service",
             "env" : {
-               "nodeId": "default",
-               "redis" : {
-                   "password" : null,
-                   "port" : "process.env.REDIS_PORT_6379_TCP_PORT||6379",
-                   "hostname" : "process.env.REDIS_PORT_6379_TCP_ADDR||localhost"
+                "nodeId": "default",
+                "paas" : "redis",
+                "redis" : {
+                    "password" : null,
+                    "port" : "process.env.REDIS_PORT_6379_TCP_PORT||6379",
+                    "hostname" : "process.env.REDIS_PORT_6379_TCP_ADDR||localhost"
                 },
                 "coalescing" : {
                     "interval" : 10,

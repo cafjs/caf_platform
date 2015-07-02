@@ -380,7 +380,7 @@ module.exports = {
                                                     doneChange = true;
                                                 }
                                             });
-                             process.env['VCAP_APP_PORT']="3001";
+                             process.env['PORT0']="3001";
                              app.load(null, {name: 'top'}, 'framework.json',
                                       null, function(err, $2) {
                                           if (err) {
@@ -431,7 +431,7 @@ module.exports = {
                                         });
                          },
                          function(cb) {
-                             delete process.env['VCAP_APP_PORT'];
+                             delete process.env['PORT0'];
                              var cb1 = function(err, data) {
                                  self.ws2.close();
                                  self.ws2.removeAllListeners();
