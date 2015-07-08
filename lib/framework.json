@@ -230,6 +230,7 @@
                     "env" : {
                         "webSocketPipe": false,
                         "httpPipe" : true,
+                        "maxAgeMsec" : 0,
                         "path": "/",
                         "publicPath" : "$._.env.publicPath"
                     }
@@ -242,6 +243,7 @@
                         "webSocketPipe": false,
                         "httpPipe" : true,
                         "path": "/",
+                        "maxAgeMsec" : "process.env.maxAgeMsec||3600000",
                         "publicPath" : "$._.env.publicSharedPath"
                     }
                 }
