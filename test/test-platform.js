@@ -368,7 +368,7 @@ module.exports = {
                                                     var all = self.$._.$.nodes
                                                         .getAllPublicNodeIds();
                                                     console.log(all);
-                                                    test.equals(all.length, 11);
+                                                    test.equals(all.length, 101);
                                                     var k = Object
                                                         .keys(nodes.$);
                                                     k = k

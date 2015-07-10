@@ -1,6 +1,15 @@
 {
     "name": "top",
+    "env" : {
+        "appPublisher" :"someone1",
+        "appLocalName" : "fooApp1",
+        "appSuffix" : "vcap.me"
+    },
     "components": [
+        {
+            "name": "security",
+            "module" : null
+        },
         {
             "name": "lease",
             "env" : {
