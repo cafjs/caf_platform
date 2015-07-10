@@ -3,18 +3,18 @@
     "module" : "./platform_main",
     "description" : "Platform supervisor",
     "env" : {
-        "maxRetries" : "process.env.maxRetries||10",
-        "retryDelay" : "process.env.retryDelay||1000",
-        "leaseTimeout": "process.env.leaseTimeout||10",
-        "interval": "process.env.interval||5000",
-        "longInterval": "process.env.longInterval||10000",
-        "dieDelay": "process.env.dieDelay||-1",
-        "maxHangRetries":  "process.env.maxHangRetries||200",
-        "publicHostname" : "process.env.publicHostname||foo.vcap.me",
-        "publicPortStart" : "process.env.publicPortStart||4000",
-        "publicPortEnd" : "process.env.publicPortEnd||4010",
-        "publicPath" : "process.env.publicPath||../../../../../public",
-        "publicSharedPath" : "process.env.publicSharedPath||../public"
+        "appPublisher" : "process.env.APP_PUBLISHER||null",
+        "appLocalName" : "process.env.APP_LOCAL_NAME||null",
+        "appSuffix" : "process.env.APP_SUFFIX||cafjs.com",
+        "maxRetries" : "process.env.MAX_RETRIES||10",
+        "retryDelay" : "process.env.RETRY_DELAY||1000",
+        "leaseTimeout": "process.env.LEASE_TIMEOUT||10",
+        "interval": "process.env.INTERVAL||5000",
+        "longInterval": "process.env.LONG_INTERVAL||10000",
+        "dieDelay": "process.env.DIE_DELAY||-1",
+        "maxHangRetries":  "process.env.MAX_HANG_RETRIES||200",
+        "publicPath" : "process.env.PUBLIC_PATH||../../../../../public",
+        "publicSharedPath" : "process.env.PUBLIC_SHARED_PATH||../public"
     },
     "components": [
         {
@@ -43,6 +43,19 @@
              }
         },
         {
+            "name": "security",
+            "module": "caf_security#plug",
+            "description": "Authenticates requests\n Properties: <keysDir> Directory with key material, defaults to colocated with ca_methods.js (i.e., <app_root>/lib). \n<accountsURL> External service to create tokens. \n <trustedPubKeyFile> Trusted public key to verify signed tokens. \n <privateKeyFile> Optional private key to sign tokens. \n <pubKeyFile> Optional public key for signing key. \n <allowNobodyUser> Enable the user 'nobody' to bypass authentication",
+            "env" : {
+                "keysDir": null,
+                "trustedPubKeyFile" : "rsa_pub.pem",
+                "privateKeyFile": null,
+                "publicKeyFile" : null,
+                "accountsURL": "process.env.ACCOUNTS_URL||https://root-accounts.cafjs.com",
+                "allowNobodyUser" : false
+            }
+        },
+        {
             "name": "cp",
             "module" : "caf_redis#plug",
             "description" : "Checkpointing service",
@@ -61,6 +74,33 @@
             }
         },
         {
+            "name": "cp2",
+            "module" : "caf_redis#plug",
+            "description" : "Checkpointing service (Pub/Sub channel)",
+            "env" : {
+                "nodeId": "default",
+                "paas" : "redis",
+                "redis" : {
+                    "password" : null,
+                    "port" : "process.env.REDIS_PORT_6379_TCP_PORT||6379",
+                    "hostname" : "process.env.REDIS_PORT_6379_TCP_ADDR||localhost"
+                },
+                "coalescing" : {
+                    "interval" : 10,
+                    "maxPendingUpdates" : 20
+                }
+            }
+        },
+        {
+            "name": "sharing",
+            "module": "caf_sharing#plug",
+            "description": "Sharing Actors support service",
+            "env" : {
+                "persistService" : "cp",
+                "routeService" : "cp2"
+            }
+        },
+        {
             "name": "lease",
             "module": "./plug_lease",
             "description": "Lease service",
@@ -76,13 +116,11 @@
                 "stealthNode" : false,
                 "nodesService" : "cp",
                 "leaseTimeout": "$._.env.leaseTimeout",
-                "allPublicNodeIds" : [
-                    {
-                        "hostname" : "$._.env.publicHostname",
-                        "portRange" : ["$._.env.publicPortStart",
-                                       "$._.env.publicPortEnd"]
-                    }
-                ]
+                "allPublicNodeIds" : {
+                    "publicHostname" : "process.env.PUBLIC_HOSTNAME||null",
+                    "publicRangeStart" : "process.env.PUBLIC_RANGE_START||0",
+                    "publicRangeEnd" : "process.env.PUBLIC_RANGE_END||100"
+                }
             }
         },
         {
@@ -145,8 +183,7 @@
                 "maxRetries" :"$._.env.maxRetries",
                 "retryDelay" : "$._.env.retryDelay",
                 "specialMethods" : [
-                    "ping",
-                    "foo"
+                    "ping"
                 ]
             },
             "components": [
