@@ -259,7 +259,7 @@ module.exports = {
     },
     hello: function(test) {
         var self = this;
-        test.expect(5);
+        test.expect(11);
         var checkResponse = function(err, data) {
             test.ifError(err);
             if (typeof data === 'string') {
@@ -267,6 +267,11 @@ module.exports = {
             }
             var resp = json_rpc.getAppReplyData(data);
             test.equals(resp, 'Bye:bar');
+            var meta = json_rpc.getMeta(data);
+            test.equal(typeof meta.startTime, 'number');
+            test.equal(typeof meta.endTime, 'number');
+            test.ok(meta.endTime > meta.startTime);
+            console.log(meta);
         };
         async.series([
                          function(cb) {
