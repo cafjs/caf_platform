@@ -15,7 +15,13 @@
         "dieDelay": "process.env.DIE_DELAY||-1",
         "maxHangRetries":  "process.env.MAX_HANG_RETRIES||200",
         "publicPath" : "process.env.PUBLIC_PATH||../../../../../public",
-        "publicSharedPath" : "process.env.PUBLIC_SHARED_PATH||../public"
+        "publicSharedPath" : "process.env.PUBLIC_SHARED_PATH||../public",
+	"keysDir": "process.env.KEYS_DIR||null",
+	"trustedPubKeyFile" : "process.env.TRUSTED_PUB_KEY_FILE||rsa_pub.pem",
+	"publicKeyFile" : "process.env.PUBLIC_KEY_FILE||null",
+	"privateKeyFile" : "process.env.PRIVATE_KEY_FILE||null",
+	"accountsURL" : "process.env.ACCOUNTS_URL||https://root-accounts.cafjs.com"
+ 
     },
     "components": [
         {
@@ -48,11 +54,11 @@
             "module": "caf_security#plug",
             "description": "Authenticates requests\n Properties: <keysDir> Directory with key material, defaults to colocated with ca_methods.js (i.e., <app_root>/lib). \n<accountsURL> External service to create tokens. \n <trustedPubKeyFile> Trusted public key to verify signed tokens. \n <privateKeyFile> Optional private key to sign tokens. \n <pubKeyFile> Optional public key for signing key. \n <allowNobodyUser> Enable the user 'nobody' to bypass authentication",
             "env" : {
-                "keysDir": null,
-                "trustedPubKeyFile" : "rsa_pub.pem",
-                "privateKeyFile": null,
-                "publicKeyFile" : null,
-                "accountsURL": "process.env.ACCOUNTS_URL||https://root-accounts.cafjs.com",
+                "keysDir": "$._.env.keysDir",
+                "trustedPubKeyFile" : "$._.env.trustedPubKeyFile",
+                "privateKeyFile": "$._.env.privateKeyFile",
+                "publicKeyFile" :  "$._.env.publicKeyFile",
+                "accountsURL": "$._.env.accountsURL",
                 "allowNobodyUser" : false
             }
         },
