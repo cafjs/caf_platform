@@ -20,7 +20,8 @@
 	"trustedPubKeyFile" : "process.env.TRUSTED_PUB_KEY_FILE||rsa_pub.pem",
 	"publicKeyFile" : "process.env.PUBLIC_KEY_FILE||null",
 	"privateKeyFile" : "process.env.PRIVATE_KEY_FILE||null",
-	"accountsURL" : "process.env.ACCOUNTS_URL||https://root-accounts.cafjs.com"
+	"accountsURL" : "process.env.ACCOUNTS_URL||https://root-accounts.cafjs.com",
+        "redisPaaS" : "process.env.REDIS_PAAS||redis"
  
     },
     "components": [
@@ -68,7 +69,7 @@
             "description" : "Checkpointing service",
             "env" : {
                 "nodeId": "default",
-                "paas" : "redis",
+                "paas" : "$._.env.redisPaaS",
                 "redis" : {
                     "password" : null,
                     "port" : "process.env.REDIS_PORT_6379_TCP_PORT||6379",
@@ -86,7 +87,7 @@
             "description" : "Checkpointing service (Pub/Sub channel)",
             "env" : {
                 "nodeId": "default",
-                "paas" : "redis",
+                "paas" : "$._.env.redisPaaS",
                 "redis" : {
                     "password" : null,
                     "port" : "process.env.REDIS_PORT_6379_TCP_PORT||6379",
