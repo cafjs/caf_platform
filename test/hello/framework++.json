@@ -7,6 +7,12 @@
     },
     "components": [
         {
+            "name": "log",
+            "env" : {
+                "logLevel" : "WARN"
+            }
+        },
+        {
             "name": "security",
             "module" : null
         },

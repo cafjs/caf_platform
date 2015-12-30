@@ -443,7 +443,7 @@ module.exports = {
                                  setTimeout(function() {
                                                 //expire lease
                                                 cb(err, data);
-                                            }, 20000);
+                                            }, 21000);
                              };
                              self.$2.top.__ca_graceful_shutdown__(null, cb1);
                          },
