@@ -10,7 +10,7 @@
         "maxRetries" : "process.env.MAX_RETRIES||10",
         "retryDelay" : "process.env.RETRY_DELAY||1000",
         "leaseTimeout": "process.env.LEASE_TIMEOUT||10",
-        "interval": "process.env.INTERVAL||5000",
+        "interval": "process.env.INTERVAL||2000",
         "longInterval": "process.env.LONG_INTERVAL||10000",
         "dieDelay": "process.env.DIE_DELAY||100",
         "maxHangRetries":  "process.env.MAX_HANG_RETRIES||20",
