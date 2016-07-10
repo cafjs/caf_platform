@@ -21,8 +21,8 @@
 	"publicKeyFile" : "process.env.PUBLIC_KEY_FILE||null",
 	"privateKeyFile" : "process.env.PRIVATE_KEY_FILE||null",
 	"accountsURL" : "process.env.ACCOUNTS_URL||https://root-accounts.cafjs.com",
-        "redisPaaS" : "process.env.REDIS_PAAS||redis"
- 
+        "redisPaaS" : "process.env.REDIS_PAAS||redis",
+        "strongHash" : "process.env.STRONG_HASH||[\"iot.tgz\"]"
     },
     "components": [
         {
@@ -284,6 +284,7 @@
                     "env" : {
                         "webSocketPipe": false,
                         "httpPipe" : true,
+                        "strongHash" : "$._.env.strongHash",
                         "maxAgeMsec" : 0,
                         "path": "/",
                         "publicPath" : "$._.env.publicPath"
@@ -296,6 +297,7 @@
                     "env" : {
                         "webSocketPipe": false,
                         "httpPipe" : true,
+                        "strongHash" : "$._.env.strongHash",
                         "path": "/",
                         "maxAgeMsec" : "process.env.maxAgeMsec||3600000",
                         "publicPath" : "$._.env.publicSharedPath"
