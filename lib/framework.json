@@ -118,6 +118,13 @@
             }
         },
         {
+             "module": "caf_profiler#plug",
+             "name": "profiler",
+             "description": "Performance profiling of CA requests\n Properties:\n",
+             "env" : {
+              }
+        },
+        {
             "name": "lease",
             "module": "./plug_lease",
             "description": "Lease service",
@@ -200,7 +207,8 @@
                 "maxRetries" :"$._.env.maxRetries",
                 "retryDelay" : "$._.env.retryDelay",
                 "specialMethods" : [
-                    "ping"
+                    "ping",
+                    "stats"
                 ]
             },
             "components": [
@@ -225,7 +233,6 @@
                         "cacheService" : "cp"
                     }
                 },
-
                 {
                     "name": "ping",
                     "module": "./pipe_ping",
@@ -234,6 +241,16 @@
                         "webSocketPipe": true,
                         "httpPipe" : true,
                         "path": "/ping"
+                    }
+                },
+                {
+                    "name": "stats",
+                    "module": "./pipe_stats",
+                    "description": "Performance statistics",
+                    "env" : {
+                        "webSocketPipe": true,
+                        "httpPipe" : true,
+                        "path": "/stats"
                     }
                 },
                 {
