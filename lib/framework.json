@@ -118,13 +118,6 @@
             }
         },
         {
-             "module": "caf_profiler#plug",
-             "name": "profiler",
-             "description": "Performance profiling of CA requests\n Properties:\n",
-             "env" : {
-              }
-        },
-        {
             "name": "lease",
             "module": "./plug_lease",
             "description": "Lease service",
@@ -146,6 +139,13 @@
                     "publicRangeEnd" : "process.env.PUBLIC_RANGE_END||100"
                 }
             }
+        },
+        {
+             "module": "caf_profiler#plug",
+             "name": "profiler",
+             "description": "Performance profiling of CA requests\n Properties:\n",
+             "env" : {
+              }
         },
         {
             "name": "registry",
