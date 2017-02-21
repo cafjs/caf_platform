@@ -22,7 +22,9 @@
 	"privateKeyFile" : "process.env.PRIVATE_KEY_FILE||null",
 	"accountsURL" : "process.env.ACCOUNTS_URL||https://root-accounts.cafjs.com",
         "redisPaaS" : "process.env.REDIS_PAAS||redis",
-        "strongHash" : "process.env.STRONG_HASH||[\"iot.tgz\"]"
+        "strongHash" : "process.env.STRONG_HASH||[\"iot.tgz\"]",
+        "quotaURL" : "process.env.QUOTA_URL||null",
+        "quotaCA" : "process.env.QUOTA_CA||null"
     },
     "components": [
         {
@@ -53,14 +55,16 @@
         {
             "name": "security",
             "module": "caf_security#plug",
-            "description": "Authenticates requests\n Properties: <keysDir> Directory with key material, defaults to colocated with ca_methods.js (i.e., <app_root>/lib). \n<accountsURL> External service to create tokens. \n <trustedPubKeyFile> Trusted public key to verify signed tokens. \n <privateKeyFile> Optional private key to sign tokens. \n <pubKeyFile> Optional public key for signing key. \n <allowNobodyUser> Enable the user 'nobody' to bypass authentication",
+            "description": "Authenticates requests\n Properties: <keysDir> Directory with key material, defaults to colocated with ca_methods.js (i.e., <app_root>/lib). \n<accountsURL> External service to create tokens. \n <trustedPubKeyFile> Trusted public key to verify signed tokens. \n <privateKeyFile> Optional private key to sign tokens. \n <pubKeyFile> Optional public key for signing key. \n <allowNobodyUser> Enable the user 'nobody' to bypass authentication. \n <quotaURL> the URL of the quota service, or missing if service off. \n <quotaCA> the CA entrypoint for the service, or missing if service off.",
             "env" : {
                 "keysDir": "$._.env.keysDir",
                 "trustedPubKeyFile" : "$._.env.trustedPubKeyFile",
                 "privateKeyFile": "$._.env.privateKeyFile",
                 "publicKeyFile" :  "$._.env.publicKeyFile",
                 "accountsURL": "$._.env.accountsURL",
-                "allowNobodyUser" : false
+                "allowNobodyUser" : false,
+                "quotaURL" : "$._.env.quotaURL",
+                "quotaCA" : "$._.env.quotaCA"
             }
         },
         {
