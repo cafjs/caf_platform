@@ -16,10 +16,10 @@ limitations under the License.
 "use strict";
 
 exports.methods = {
-    "__ca_init__" : function(cb) {
+    async __ca_init__() {
         this.$.log.debug("++++++++++++++++Calling init");
         this.state.pulses = 0;
-        cb(null);
+        return [];
     },
     "__ca_resume__" : function(cp, cb) {
         this.$.log.debug("++++++++++++++++Calling resume: pulses=" +
@@ -27,19 +27,19 @@ exports.methods = {
 
         cb(null);
     },
-    "__ca_pulse__" : function(cb) {
+    async __ca_pulse__() {
         this.state.pulses = this.state.pulses + 1;
         this.$.log.debug('<<< Calling Pulse>>>' + this.state.pulses);
-        cb(null);
+        return [];
     },
     hello: function(msg, cb) {
         this.state.lastMsg = msg;
         cb(null, 'Bye:' + msg);
     },
-    helloFail: function(msg, cb) {
+    async helloFail(msg) {
         this.state.lastMsg = msg;
         var err = new Error('Something bad happened');
-        cb(err);
+        return [err];
     },
     helloException: function(msg, cb) {
         this.state.lastMsg = msg;
@@ -57,8 +57,8 @@ exports.methods = {
         };
         setTimeout(f, 100);
     },
-    getLastMessage: function(cb) {
-        cb(null, this.state.lastMsg);
+    async getLastMessage() {
+        return [null, this.state.lastMsg];
     },
     getQueueLength: function(cb) {
         cb(null, this.$.inq.queueLength());
