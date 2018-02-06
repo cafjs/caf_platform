@@ -1,7 +1,7 @@
 {
     "name": "caf_platform",
     "description": "Cloud Assistant Framework Platform",
-    "version": "0.3.0",
+    "version": "0.3.1",
     "author": "Antonio Lain <antlai@cafjs.com>",
     "dependencies": {
         "caf_components": "^0.3.0",
@@ -24,6 +24,14 @@
         "caf_ca": "^0.3.0",
         "caf_session": "^0.3.0",
         "request": "^2.51.0",
+        "typescript": "^2.7.1",
+        "@types/node": "^9.4.0",
+        "@types/ws": "^4.0.0",
+        "@types/connect": "^3.4.31",
+        "@types/etag": "^1.8.0",
+        "@types/compression": "^0.0.35",
+        "@types/serve-static": "^1.13.1",
+        "@types/body-parser": "^1.16.8",
         "jsdoc": "^3.4.2"
     },
     "main": "index",
@@ -32,7 +40,8 @@
         "test": "node ./node_modules/.bin/nodeunit",
         "eslint": "./node_modules/.bin/eslint .",
         "eslintfix": "./node_modules/.bin/eslint --fix .",
-        "docs": "rm -fr docs; mkdir -p docs; ./node_modules/.bin/jsdoc --pedantic -c ./conf.json -d docs lib/*.js --readme ./README.md --package ./package.json"
+        "docs": "rm -fr docs; mkdir -p docs; ./node_modules/.bin/jsdoc --pedantic -c ./conf.json -d docs lib/*.js --readme ./README.md --package ./package.json",
+        "checktype" : "./node_modules/.bin/tsc"
     },
     "repository": {
         "type": "git",
