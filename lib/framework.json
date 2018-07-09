@@ -22,6 +22,7 @@
 	"privateKeyFile" : "process.env.PRIVATE_KEY_FILE||null",
 	"accountsURL" : "process.env.ACCOUNTS_URL||https://root-accounts.cafjs.com",
         "redisPaaS" : "process.env.REDIS_PAAS||redis",
+        "redisPassword" : "process.env.REDIS_PASSWORD||null",
         "strongHash" : "process.env.STRONG_HASH||[\"iot.tgz\"]",
         "quotaURL" : "process.env.QUOTA_URL||null",
         "quotaCA" : "process.env.QUOTA_CA||null"
@@ -40,7 +41,7 @@
             "module": "./plug_paas",
             "description": "PaaS config service",
              "env": {
-                 "paas" : "marathon",
+                 "paas" : "process.env.PAAS||marathon",
                  "port" : "process.env.PORT0||3000",
                  "internalPort" : "process.env.DOCKER_APP_INTERNAL_PORT||-1",
                  "host" : "process.env.HOST||localhost",
@@ -48,7 +49,7 @@
                  "redis" : {
                      "port" : "process.env.REDIS_PORT_6379_TCP_PORT||-1",
                      "hostname" : "process.env.HOST||default",
-                     "password" : null
+                     "password" : "$._.env.redisPassword"
                  }
              }
         },
@@ -75,7 +76,7 @@
                 "nodeId": "default",
                 "paas" : "$._.env.redisPaaS",
                 "redis" : {
-                    "password" : null,
+                    "password" : "$._.env.redisPassword",
                     "port" : "process.env.REDIS_PORT_6379_TCP_PORT||6379",
                     "hostname" : "process.env.REDIS_PORT_6379_TCP_ADDR||localhost"
                 },
@@ -93,7 +94,7 @@
                 "nodeId": "default",
                 "paas" : "$._.env.redisPaaS",
                 "redis" : {
-                    "password" : null,
+                    "password" : "$._.env.redisPassword",
                     "port" : "process.env.REDIS_PORT_6379_TCP_PORT||6379",
                     "hostname" : "process.env.REDIS_PORT_6379_TCP_ADDR||localhost"
                 },
@@ -134,7 +135,7 @@
             "module": "./plug_nodes",
             "description": "Nodes management service",
             "env" : {
-                "stealthNode" : false,
+                "stealthNode" : "process.env.STEALTH_NODE||false",
                 "nodesService" : "cp",
                 "leaseTimeout": "$._.env.leaseTimeout",
                 "allPublicNodeIds" : {
