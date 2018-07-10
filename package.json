@@ -24,7 +24,7 @@
         "caf_ca": "^0.3.0",
         "caf_session": "^0.3.0",
         "request": "^2.51.0",
-        "typescript": "^2.7.1",
+        "typescript": "2.8.X",
         "@types/node": "^9.4.0",
         "@types/ws": "^4.0.0",
         "@types/connect": "^3.4.31",
