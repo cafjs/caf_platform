@@ -5,7 +5,8 @@ Co-design permanent, active, stateful, reliable cloud proxies with your web app 
 See http://www.cafjs.com
 
 ## CAF Platform
-[![Build Status](http://ci.cafjs.com/api/badges/cafjs/caf_platform/status.svg)](http://ci.cafjs.com/cafjs/caf_platform)
+[![Build Status](https://travis-ci.org/cafjs/caf_platform.svg?branch=master)](https://travis-ci.org/cafjs/caf_platform)
+
 
 This repository contains CAF.js core platform components.
 
