@@ -25,7 +25,8 @@
         "redisPassword" : "process.env.REDIS_PASSWORD||null",
         "strongHash" : "process.env.STRONG_HASH||[\"iot.tgz\"]",
         "quotaURL" : "process.env.QUOTA_URL||null",
-        "quotaCA" : "process.env.QUOTA_CA||null"
+        "quotaCA" : "process.env.QUOTA_CA||null",
+        "debugger" : "process.env.DEBUGGER||false"
     },
     "components": [
         {
