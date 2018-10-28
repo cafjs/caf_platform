@@ -3,6 +3,7 @@
     "module" : "./platform_main",
     "description" : "Platform supervisor",
     "env" : {
+        "appProtocol" : "process.env.APP_PROTOCOL||https",
         "appPublisher" : "process.env.APP_PUBLISHER||null",
         "appLocalName" : "process.env.APP_LOCAL_NAME||null",
         "appSuffix" : "process.env.APP_SUFFIX||cafjs.com",
@@ -53,6 +54,16 @@
                      "password" : "$._.env.redisPassword"
                  }
              }
+        },
+        {
+            "name": "crossapp",
+            "module": "caf_crossapp#plug",
+            "description": "Cross application call service.",
+            "env" : {
+                "appSuffix" : "$._.env.appSuffix",
+                "appProtocol" : "$._.env.appProtocol",
+                "strictArgs" : "process.env.STRICT_ARGS||false"
+            }
         },
         {
             "name": "security",
