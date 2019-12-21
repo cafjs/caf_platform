@@ -20,7 +20,7 @@
         "ws": "^1.0.1"
     },
     "devDependencies": {
-        "eslint": "^3.1.1",
+        "eslint": "^6.8.0",
         "nodeunit": ">=0.9",
         "caf_ca": "^0.3.0",
         "caf_session": "^0.3.0",
