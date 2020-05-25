@@ -35,7 +35,7 @@
             "module": "caf_components#plug_log",
             "description": "Logger service",
             "env" : {
-                "logLevel" : "DEBUG"
+                "logLevel" : "process.env.LOG_LEVEL||DEBUG"
             }
         },
         {
