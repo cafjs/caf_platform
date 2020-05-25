@@ -27,7 +27,7 @@
         "caf_session": "^0.4.0",
         "request": "^2.51.0",
         "typescript": "3.7.3",
-        "@types/node": "^12.12.21",
+        "@types/node": "12.12.31",
         "@types/ws": "^4.0.0",
         "@types/connect": "^3.4.31",
         "@types/etag": "^1.8.0",
