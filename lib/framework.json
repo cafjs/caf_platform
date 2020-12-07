@@ -8,6 +8,8 @@
         "appLocalName" : "process.env.APP_LOCAL_NAME||null",
         "appSuffix" : "process.env.APP_SUFFIX||cafjs.com",
         "appPort" :  "process.env.APP_PORT||null",
+        "appCDN" : "process.env.APP_CDN||null",
+        "appSubdirCDN" : "process.env.APP_SUBDIR_CDN||null",
         "synchronousInit" : "process.env.SYNCHRONOUS_INIT||true",
         "maxRetries" : "process.env.MAX_RETRIES||10",
         "retryDelay" : "process.env.RETRY_DELAY||1000",
@@ -313,6 +315,19 @@
                         "webSocketPipe": true,
                         "httpPipe" : true,
                         "path": "/ca"
+                    }
+                },
+                {
+                    "name": "cdn",
+                    "module": "./pipe_cdn",
+                    "description": "Enable a CDN transformation",
+                    "env" : {
+                        "webSocketPipe": false,
+                        "httpPipe" : true,
+                        "path": "/",
+                        "appCDN" : "$._.env.appCDN",
+                        "appSubdirCDN" : "$._.env.appSubdirCDN",
+                        "appLocalName" : "$._.env.appLocalName"
                     }
                 },
                 {
