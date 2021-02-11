@@ -35,7 +35,8 @@
         "@types/compression": "^0.0.35",
         "@types/serve-static": "^1.13.1",
         "@types/body-parser": "^1.16.8",
-        "jsdoc": "^3.4.2"
+        "jsdoc": "^3.4.2",
+        "docdash": "^1.2.0"
     },
     "main": "index",
     "homepage": "http://www.cafjs.com",
