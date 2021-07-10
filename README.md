@@ -5,7 +5,8 @@ Co-design cloud assistants with your web app and IoT devices.
 See https://www.cafjs.com
 
 ## CAF Platform
-![Build Status](https://github.com/cafjs/caf_platform/workflows/push.yml/badge.svg)
+
+[![Build Status](https://github.com/cafjs/caf_platform/actions/workflows/push.yml/badge.svg)](https://github.com/cafjs/caf_platform/actions/workflows/push.yml)
 
 
 This repository contains `Caf.js` core platform components.
