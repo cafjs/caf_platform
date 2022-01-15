@@ -31,7 +31,8 @@
         "strongHash" : "process.env.STRONG_HASH||[\"iot.tgz\"]",
         "quotaApp" : "process.env.QUOTA_APP||root-people",
         "debugger" : "process.env.DEBUGGER||false",
-        "logLevel" : "process.env.LOG_LEVEL||WARN"
+        "logLevel" : "process.env.LOG_LEVEL||WARN",
+        "webhookPath": "process.env.WEBHOOK_PATH||/webhook"
     },
     "components": [
         {
@@ -284,6 +285,26 @@
                         "webSocketPipe": false,
                         "httpPipe" : true,
                         "path": "/ca"
+                    }
+                },
+                {
+                    "name": "bodyParser2",
+                    "module": "./pipe_bodyParser",
+                    "description": "JSON body parser for webhook",
+                    "env" : {
+                        "webSocketPipe": false,
+                        "httpPipe" : true,
+                        "path": "$._.env.webhookPath"
+                    }
+                },
+                {
+                    "name": "webhook",
+                    "module": "./pipe_webhook",
+                    "description": "Handle a webhook notification",
+                    "env" : {
+                        "webSocketPipe": false,
+                        "httpPipe" : true,
+                        "path": "$._.env.webhookPath"
                     }
                 },
                 {
