@@ -284,6 +284,8 @@
                     "env" : {
                         "webSocketPipe": false,
                         "httpPipe" : true,
+                        "textOnly" : false,
+                        "type" : "application/json",
                         "path": "/ca"
                     }
                 },
@@ -294,6 +296,8 @@
                     "env" : {
                         "webSocketPipe": false,
                         "httpPipe" : true,
+                        "textOnly" : true,
+                        "type" : "process.env.BODY_PARSER_TYPE||application/json",
                         "path": "$._.env.webhookPath"
                     }
                 },
@@ -304,7 +308,8 @@
                     "env" : {
                         "webSocketPipe": false,
                         "httpPipe" : true,
-                        "path": "$._.env.webhookPath"
+                        "path": "$._.env.webhookPath",
+                        "signatureHeader": "process.env.WEBHOOK_SIGNATURE_HEADER||X-Hub-Signature-256"
                     }
                 },
                 {
