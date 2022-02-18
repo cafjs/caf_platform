@@ -1,7 +1,7 @@
 {
     "name": "caf_platform",
     "description": "Cloud Assistant Framework Platform",
-    "version": "0.4.6",
+    "version": "0.4.7",
     "author": "Antonio Lain <antlai@cafjs.com>",
     "license": "Apache-2.0",
     "dependencies": {
@@ -11,6 +11,7 @@
         "caf_redis": "^0.4.0",
         "caf_sharing": "^0.4.0",
         "caf_pubsub": "^0.4.0",
+        "caf_delay": "^0.4.0",
         "caf_profiler": "^0.4.0",
         "caf_crossapp": "^0.4.0",
         "connect": "^3.3.0",
