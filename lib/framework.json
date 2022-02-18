@@ -142,6 +142,15 @@
             }
         },
         {
+            "name": "delay",
+            "module": "caf_delay#plug",
+            "description": "Delay method service.",
+            "env" : {
+                "delayIntervalCheckInSec" : "process.env.DELAY_INTERVAL_CHECK_IN_SEC||1",
+                "ignoreAfterInSec" : "process.env.IGNORE_AFTER_IN_SEC||86400"
+            }
+        },
+        {
             "name": "lease",
             "module": "./plug_lease",
             "description": "Lease service",
