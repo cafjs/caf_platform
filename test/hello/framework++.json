@@ -3,7 +3,7 @@
     "env" : {
         "appPublisher" :"someone1",
         "appLocalName" : "fooApp1",
-        "appSuffix" : "vcap.me"
+        "appSuffix" : "localtest.me"
     },
     "components": [
         {
